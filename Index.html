@@ -18,6 +18,13 @@
     }
 
     .card {
+        animation: pop 1s ease, glow 4s infinite alternate;
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px #f3c4ff; }
+  to { box-shadow: 0 0 35px #ffb6d9; }
+}
+
       background: rgba(255, 255, 255, 0.4);
       padding: 40px;
       border-radius: 30px;
@@ -62,8 +69,38 @@
     }
   </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  function launchConfetti() {
+    confetti({
+      particleCount: 180,
+      spread: 90,
+      origin: { y: 0.6 }
+    });
+  }
+</script>
+
 
 <body>
+<div class="hearts"></div>
+
+<style>
+.hearts::before {
+  content: "💜 🌸 💕 💖";
+  position: fixed;
+  bottom: -10%;
+  left: 50%;
+  font-size: 2rem;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes floatUp {
+  0% { transform: translate(-50%, 0); }
+  100% { transform: translate(-50%, -120vh); }
+}
+</style>
 
   <div class="card">
     <h1>🎂 Happy Birthday 💜🌸</h1>
@@ -76,10 +113,42 @@
       Your kindness, beauty, and energy make the world brighter.  
       I hope this year brings you happiness, love, and unforgettable moments 💕
     </p>
+    <button onclick= "showSurprise()",  class="surprise-btn">
+  💝 Click for a surprise
 
-    <div class="heart">💜</div>
 
-    <p>— Dane<p>
+</button>
+
+<p id="surprise" style="display:none; margin-top:15px;">
+ You are deeply loved, appreciated, and special 💕  
+      Never forget how amazing you are.
+      
+</p>
+
+<style>
+.surprise-btn {
+  background: linear-gradient(135deg, #d9a7ff, #ffb6d9);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 15px;
+}
+</style>
+
+<script>
+function showSurprise() {
+  document.getElementById("surprise").style.display = "block";
+}
+</script>
+
+
+    <div class="heart"><button onclick="launchConfetti()">💜 </button>
+</div> 
+    <p> Dane<p>
+        
   </div>
 
 </body>
